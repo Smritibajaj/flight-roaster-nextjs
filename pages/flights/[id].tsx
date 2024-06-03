@@ -13,20 +13,14 @@ const FlightDetailPage = () => {
   );
 
   useEffect(() => {
-    let toastId;
-    if (isLoading) {
-      toastId = toast.loading("We are connecting with our flight partner");
-    } else if (isSuccess) {
-      toast.dismiss(toastId);
-      toast.success("Your Flight");
-    } else if (isError) {
-      toast.dismiss(toastId);
+     if (isError) {
+      //toast.dismiss(toastId);
       toast.error(
         "There is some delay in getting response from the Airline kindly try after some time"
       );
     }
   }, [isLoading, isSuccess, isError]);
-  console.log(data);
+
   return (
     <div>
       <div className="container mx-auto my-24">

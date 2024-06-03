@@ -3,7 +3,7 @@ import { useGetFlightsQuery } from "../../services/flights";
 import toast from "react-hot-toast";
 import Table from "@/components/table";
 import { useRouter } from "next/navigation";
-import { columns } from "@/constants/flightTableConfig";
+import { columns } from "@/components/flightConfig";
 
 const FlightPage = () => {
   const naviagte = useRouter();
@@ -11,25 +11,24 @@ const FlightPage = () => {
   const { data, isLoading, isError, isSuccess } = useGetFlightsQuery(
     undefined,
     {
-      pollingInterval: 5000,
+      pollingInterval: 50000,
     }
   );
   const handleRowClick = (rowData: any) => {
-    console.log("Row clicked:", rowData);
     naviagte.push(`/flights/${rowData.id}`);
   };
 
   useEffect(() => {
     let toastId;
     if (isLoading) {
-      toastId = toast.loading("We are connecting with our flight partner");
+      toastId = toast.loading("We are connecting with our flight partner.");
     } else if (isSuccess) {
       toast.dismiss(toastId);
-      toast.success("Your Flight");
+      toast.success("Your Flight data is here checkout your result.");
     } else if (isError) {
       toast.dismiss(toastId);
       toast.error(
-        "There is some delay in getting response from the Airline kindly try after some time"
+        "There is some delay in getting response from the Airline kindly try after some time."
       );
     }
   }, [isLoading, isSuccess, isError]);

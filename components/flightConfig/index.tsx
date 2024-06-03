@@ -20,7 +20,7 @@ export const columns = [
         else if (value === "Departed") bgColor = "bg-gray-500";
   
         return (
-          <div className={`p-1 ${bgColor} text-white text-center`}>{value}</div>
+          <div className={`p-1 ${bgColor} text-white text-center rounded`}>{value}</div>
         );
       },
     },
