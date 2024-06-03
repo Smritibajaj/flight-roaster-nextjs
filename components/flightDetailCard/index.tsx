@@ -1,50 +1,32 @@
-import { format } from "date-fns";
-import { FlightDetailCardProps } from "./types";
+import Chips from "../chips";
+import LabelValue from "../keyValue";
+import { FlightDetailCardProps, IKey } from "./types";
+import { getFormattedTime, getStatusColor } from "./utils";
 
 const FlightDetailCard: React.FC<FlightDetailCardProps> = ({ details }) => {
-    return (
-        <div className="rounded overflow-hidden border border-gray-100 shadow-lg bg-white m-4">
-            {details && (
-                <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">
-                        {details?.airline} - {details?.flightNumber}
-                    </div>
-                    <p className="text-gray-700 text-base">
-                        <strong>Origin:</strong> {details?.origin}
-                    </p>
-                    <p className="text-gray-700 text-base">
-                        <strong>Destination:</strong> {details?.destination}
-                    </p>
-                    <p className="text-gray-700 text-base">
-                        <strong>Departure Time:</strong> {details?.departureTime ? format(new Date(details?.departureTime), "PPpp") : '-'}
-                    </p>
-                    <p
-                        className={`text-base font-semibold ${getStatusColor(
-                            details?.status
-                        )}`}
-                    >
-                        <strong>Status:</strong> {details?.status}
-                    </p>
-                </div>
-            )}
+  return (
+    <div className="rounded overflow-hidden shadow-lg m-4">
+      {details && (
+        <div className="px-6 py-4">
+          <h4>
+            {details?.airline} - {details?.flightNumber}
+          </h4>
+          <LabelValue label={"Origin:"} value={details?.origin} />
+          <LabelValue label={"Destination:"} value={details?.destination} />
+          <LabelValue
+            label={"Departure Time:"}
+            value={getFormattedTime(details?.departureTime)}
+          />
+          <div className="w-40 my-4">
+            <Chips
+              classes={getStatusColor(details?.status)}
+              value={details?.status}
+            />
+          </div>
         </div>
-    );
+      )}
+    </div>
+  );
 };
-
-// Function to determine the status color based on the flight status
-function getStatusColor(status: string) {
-    switch (status.toLowerCase()) {
-        case "on time":
-            return "text-green-500";
-        case "delayed":
-            return "text-red-500";
-        case "boarding":
-            return "text-blue-500";
-        case "departed":
-            return "text-gray-500";
-        default:
-            return "text-gray-700";
-    }
-}
 
 export default FlightDetailCard;

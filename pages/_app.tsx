@@ -10,9 +10,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <Header title={"Flight Roaster"} />
-      <Component {...pageProps} />
+      <div className="container mx-auto my-24">
+        <Component {...pageProps} />
+      </div>
       <Footer />
-      <Toaster />
+      <Toaster position="top-right" reverseOrder={false} />
     </Provider>
   );
 }

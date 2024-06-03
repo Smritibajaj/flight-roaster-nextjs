@@ -90,7 +90,6 @@ const Table: React.FC<TableProps> = ({ columns, data, onRowClick }) => {
             {columns.map((column, index) => (
               <th
                 key={index}
-                className="border p-2 text-left cursor-pointer"
                 onClick={() => handleSort(column.accessor)}
               >
                 {column.header}

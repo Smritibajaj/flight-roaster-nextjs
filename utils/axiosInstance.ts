@@ -1,8 +1,10 @@
+import { message } from "@/constants/message";
 import axios, {
   AxiosInstance,
   InternalAxiosRequestConfig,
   AxiosError,
 } from "axios";
+import toast from "react-hot-toast";
 
 const axiosInstance: AxiosInstance = axios.create();
 axios.defaults.baseURL = "";
@@ -18,9 +20,13 @@ axiosInstance.interceptors.request.use(
   }
 );
 axiosInstance.interceptors.response.use(
-  (response): any => response.data,
+  (response): any => {
+    toast.success(message.success);
+    return response.data;
+  },
   (error: AxiosError): Promise<never> => {
     console.error(error);
+    toast.error(message.error);
     return Promise.reject({
       status: error?.response?.status,
       message: "",
