@@ -25,3 +25,9 @@ In set added next js application along with below packages
 
 # Constants
 1. Api Urls
+
+
+# 3rd June 2024
+
+1. Completed pages 
+2. Added Testing library
