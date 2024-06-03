@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { FlightDetailCardProps } from "./types";
 
 const FlightDetailCard: React.FC<FlightDetailCardProps> = ({ details }) => {
@@ -15,7 +16,7 @@ const FlightDetailCard: React.FC<FlightDetailCardProps> = ({ details }) => {
                         <strong>Destination:</strong> {details?.destination}
                     </p>
                     <p className="text-gray-700 text-base">
-                        <strong>Departure Time:</strong> {details?.departureTime}
+                        <strong>Departure Time:</strong> {details?.departureTime ? format(new Date(details?.departureTime), "PPpp") : '-'}
                     </p>
                     <p
                         className={`text-base font-semibold ${getStatusColor(
