@@ -16,7 +16,7 @@ export interface TableProps {
 }
 
 export interface State {
-  sortConfig: { key: string | null; direction: "ascending" | "descending" };
+  sortConfig: { key: string; direction: "ascending" | "descending" };
   bgColor: boolean;
   searchTerm: string;
 }
@@ -24,7 +24,7 @@ export interface State {
 export type Action =
   | {
       type: "SET_SORT_CONFIG";
-      payload: { key: string | null; direction: "ascending" | "descending" };
+      payload: { key: string; direction: "ascending" | "descending" };
     }
   | { type: "TOGGLE_BG_COLOR" }
   | { type: "SET_SEARCH_TERM"; payload: string };

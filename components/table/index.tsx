@@ -3,7 +3,7 @@ import { Action, State, TableProps } from "./types";
 
 
 const initialState: State = {
-  sortConfig: { key: null, direction: "ascending" },
+  sortConfig: { key: 'id', direction: "ascending" },
   bgColor: true,
   searchTerm: "",
 };
@@ -42,7 +42,7 @@ const Table: React.FC<TableProps> = ({ columns, data, onRowClick }) => {
       )
     );
 
-    if (sortConfig.key) {
+    if (sortConfig?.key) {
       filteredData.sort((a, b) => {
         const valueA = a[sortConfig?.key];
         const valueB = b[sortConfig?.key];
