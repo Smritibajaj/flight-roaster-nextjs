@@ -1,10 +1,24 @@
 import React, { useEffect } from "react";
 import { useGetFlightsQuery } from "../../services/flights";
 import toast from "react-hot-toast";
+import Table from "@/components/table";
+import { useRouter } from "next/navigation";
+import { columns } from "@/constants/flightTableConfig";
 
 const FlightPage = () => {
-  const { data, isLoading, isError, isSuccess } = useGetFlightsQuery();
-  console.log(data);
+  const naviagte = useRouter();
+
+  const { data, isLoading, isError, isSuccess } = useGetFlightsQuery(
+    undefined,
+    {
+      pollingInterval: 5000,
+    }
+  );
+  const handleRowClick = (rowData: any) => {
+    console.log("Row clicked:", rowData);
+    naviagte.push(`/flights/${rowData.id}`);
+  };
+
   useEffect(() => {
     let toastId;
     if (isLoading) {
@@ -19,14 +33,16 @@ const FlightPage = () => {
       );
     }
   }, [isLoading, isSuccess, isError]);
+
   return (
     <div>
-      <header className="mx-auto container my-6">
-        <h1 className="text-2xl text-center">Flight Roaster</h1>
-      </header>
-      <div className="container mx-auto">
-        <div className="relative overflow-x-auto">
-          
+      <div className="container mx-auto my-24">
+        <div className="relative overflow-x-auto mx-6">
+          <Table
+            columns={columns}
+            data={data ?? []}
+            onRowClick={handleRowClick}
+          />
         </div>
       </div>
     </div>
