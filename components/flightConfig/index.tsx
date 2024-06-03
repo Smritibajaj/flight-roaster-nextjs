@@ -1,5 +1,4 @@
-import { format } from "date-fns";
-import { getStatusColor } from "../flightDetailCard/utils";
+import { getFormattedTime, getStatusColor } from "../flightDetailCard/utils";
 import Chips from "../chips";
 export const columns = [
   { header: "Flight Number", accessor: "flightNumber", sortable: true },
@@ -9,7 +8,7 @@ export const columns = [
   {
     header: "Departure Time",
     accessor: "departureTime",
-    render: (value: string) => format(new Date(value), "PPpp"),
+    render: (value: string) => getFormattedTime(value),
   },
   {
     header: "Status",

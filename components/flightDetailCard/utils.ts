@@ -1,4 +1,4 @@
-import { format } from "path";
+import { format } from "date-fns";
 
 // Function to determine the status color based on the flight status
 export function getStatusColor(status: string) {
@@ -16,6 +16,7 @@ export function getStatusColor(status: string) {
   }
 }
 
-export function getFormattedTime(value: string) {
-    return format(new Date(value), "PPpp")
+export function getFormattedTime(value: string): string {
+  const date = new Date(value);
+  return format(date, "yyyy-MM-dd HH:mm:ss");
 }

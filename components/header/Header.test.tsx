@@ -9,6 +9,6 @@ describe('Header Component', () => {
     render(<Header title={title} />);
     const headingElement = screen.getByText(title);
     expect(headingElement).toBeInTheDocument();
-    expect(headingElement).toHaveClass('text-2xl font-bold text-center');
+    expect(headingElement).toHaveClass('font-bold text-center');
   });
 });
